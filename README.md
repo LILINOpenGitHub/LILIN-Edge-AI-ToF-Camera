@@ -28,6 +28,6 @@ Return: <BR>
 Parameters
 | Parameters	|  Description 	|	 
 | ---  		|  ---  	|  
-| myX   		| X axis 		| 
-| myY 		| Y axis 	| 
-| myAngle 		| The angle = 90, 60, 45, 30, 0  	| 
+| myX   		| X axis = 0 ~ 799		| 
+| myY 		| Y axis = 0 ~ 599	| 
+| myAngle 		| The angle = 90, 60, 45, 30, or 0  	| 
