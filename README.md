@@ -16,7 +16,7 @@ Return: <BR>
 
 ```
 Syntax:
-http://192.168.50.200:8592/gettofpixel?x=<myX>&y=<myY>&angle=<myAngle>
+http://192.168.0.200:8592/gettofpixel?x=<myX>&y=<myY>&angle=<myAngle>
 ```
 Return: <BR>
 { <BR>
