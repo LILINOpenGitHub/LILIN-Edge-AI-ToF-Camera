@@ -14,7 +14,7 @@ http://192.168.0.200:8592/gettofrange
 "unit":"M" <BR>
 } <BR>
 
- Parameters
+Parameters
 | Parameters	|  Description 	|	 
 | ---  		|  ---  	|  
 | min_tof_range   		| The minimun hight or depth of ToF in meter		| 
