@@ -9,9 +9,9 @@ http://192.168.0.200:8592/gettofrange
 ```
 Return: <BR>
 {
-"min_tof_range":"0.000000", 
-"max_tof_range":"7.400000", 
-"unit":"M"
+"min_tof_range":"0.000000",  <BR>
+"max_tof_range":"7.400000", <BR>
+"unit":"M" <BR>
 }
 
 ```
@@ -20,9 +20,9 @@ http://192.168.50.200:8592/gettofpixel?x=<myX>&y=<myY>&angle=<myAngle>
 ```
 Return: <BR>
 {
-"x":"1", 
-"y":"1", 
-"depth":"0.000000"
+"x":"1",  <BR>
+"y":"1",  <BR>
+"depth":"0.000000" <BR>
 }
 
 Parameters
