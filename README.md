@@ -7,7 +7,7 @@ LILIN DS632 ToF camera is a IP based PoE ToF camera for 3D structure light.
 Syntax:
 http://192.168.0.200:8592/gettofrange
 ```
-Return:
+Return: <BR>
 {
 "min_tof_range":"0.000000", 
 "max_tof_range":"7.400000", 
@@ -18,7 +18,7 @@ Return:
 Syntax:
 http://192.168.50.200:8592/gettofpixel?x=<myX>&y=<myY>&angle=<myAngle>
 ```
-Return:
+Return: <BR>
 {
 "x":"1", 
 "y":"1", 
