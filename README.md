@@ -30,4 +30,4 @@ Parameters
 | ---  		|  ---  	|  
 | myX   		| X axis 		| 
 | myY 		| Y axis 	| 
-| myAngle 		| The angle   	| 
+| myAngle 		| The angle = 90, 60, 45, 30, 0  	| 
