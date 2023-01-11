@@ -14,6 +14,12 @@ http://192.168.0.200:8592/gettofrange
 "unit":"M" <BR>
 } <BR>
 
+ Parameters
+| Parameters	|  Description 	|	 
+| ---  		|  ---  	|  
+| min_tof_range   		| The minimun hight or depth of ToF in meter		| 
+| max_tof_range 		| The maximun hight or depth of ToF in meter | 
+| unit 		| The unit of the ToF in meter or foot 	| 
 ```
 Syntax:
 http://192.168.0.200:8592/gettofpixel?x=<myX>&y=<myY>&angle=<myAngle>
