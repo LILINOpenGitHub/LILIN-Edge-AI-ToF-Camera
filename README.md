@@ -23,10 +23,10 @@ Parameters
 | max_tof_range 		| The maximun hight or depth of ToF in meter | 
 | unit 		| The unit of the ToF in meter or foot 	| 
   
-## Get hight/depth by a X and Y
+## Get hight/depth by a X and Y of the screen
 ```
 Syntax:
-http://192.168.0.200:8592/gettofpixel?x=<myX>&y=<myY>&angle=<myAngle>
+http://192.168.0.200:8592/gettofpixel?x=<myX>&y=<myY>
 ```
 <strong>Return: </strong> <BR>
 { <BR>
