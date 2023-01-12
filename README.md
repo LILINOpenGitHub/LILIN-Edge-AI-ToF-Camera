@@ -3,6 +3,8 @@ LILIN DS632 ToF camera is a IP based PoE ToF camera for 3D structure light.
 ![image](https://github.com/LILINOpenGitHub/LILIN-Edge-AI-ToF-Camera/blob/main/image/ds632.jpg)
 
 ## The SDK
+
+## Get minimum and maximun hight/depth values for the ToF Camera
 ```
 Syntax:
 http://192.168.0.200:8592/gettofrange
@@ -20,6 +22,8 @@ Parameters
 | min_tof_range   		| The minimun hight or depth of ToF in meter		| 
 | max_tof_range 		| The maximun hight or depth of ToF in meter | 
 | unit 		| The unit of the ToF in meter or foot 	| 
+  
+## Get hight/depth by a X and Y
 ```
 Syntax:
 http://192.168.0.200:8592/gettofpixel?x=<myX>&y=<myY>&angle=<myAngle>
