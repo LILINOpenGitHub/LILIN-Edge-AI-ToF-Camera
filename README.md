@@ -33,6 +33,8 @@ http://192.168.0.200:8592/gettofpixel?x=<myX>&y=<myY>
 "x":"1",  <BR>
 "y":"1",  <BR>
 "depth":"0.000000" <BR>
+"height": 2.03M
+"distance": 3.15M
 } <BR>
 
 Parameters
