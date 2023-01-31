@@ -1,5 +1,12 @@
 # LILIN-Edge-AI-ToF-Camera
-LILIN DS632 ToF camera is a IP based PoE ToF camera for 3D structure light.
+LILIN IP ToF cameras are high performance Sony 3D DepthSense ToF sensor. The Indirect Time-of-Flight (ToF) technology can measure AI object’s ranged from 0.3-meter to 7-meter, millimeter grade. The ToF camera has 4 x 940nm VCSELs that can work indoor and outdoor under sunlight.  The camera is also an IP67 ratio for outdoor environment.
+
+LILIN IP ToF Cameras adopt the latest H.265 compression technologies, which allow multiple streaming of H.264/H.265 formats in 640 x 480 resolutions for the 2D depth color image. LILIN’s multiple streaming technology transmits digital video at various bit rates and frame rates to suit both high and low bandwidth network environments.
+
+LILIN IP cameras provide various alarm notifications including mobile device live access, email notification with JPEG snapshots, HTTP push notification, and JPEG-to-FTP upload.
+
+The combination of LILIN Navigator software and IP cameras will maximize your system performance and deliver an integrated system solution for your migration to IP videos.
+
 ![image](https://github.com/LILINOpenGitHub/LILIN-Edge-AI-ToF-Camera/blob/main/image/ds632.jpg)
 
 ## The SDK
