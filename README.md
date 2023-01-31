@@ -8,7 +8,9 @@ LILIN IP cameras provide various alarm notifications including mobile device liv
 The combination of LILIN Navigator software and IP cameras will maximize your system performance and deliver an integrated system solution for your migration to IP videos.
 
 ![image](https://github.com/LILINOpenGitHub/LILIN-Edge-AI-ToF-Camera/blob/main/image/ds632.jpg)
-![File:Example.mp4](https://github.com/LILINOpenGitHub/LILIN-Edge-AI-ToF-Camera/blob/main/tof.mp4)
+<p>
+<iframe width="640" height="480" src="https://www.youtube.com/watch?v=mv00JMIrFnk" frameborder="0" allowfullscreen></iframe>
+</p>
 
 ## The SDK
 
