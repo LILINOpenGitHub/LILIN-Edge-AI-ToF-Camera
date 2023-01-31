@@ -113,5 +113,16 @@ CamTime: <TimeStamp>\r\n
 
 Example: <BR>
 {"AiEngine":[],"counter_count":[0,0,0,0,0,0,0,0],"something_vanish_in_zone1":"No","something_vanish_in_zone2":"No","something_vanish_in_zone3":"No","something_vanish_in_zone4":"No","Count":0,"configdirty":0,"AI_fps":10,"red_light":0,"snap_size":0,"snap_response":"Disable","snap_image":"","AIToF":{"Time":"1675132307","global_min":"0.000000","global_min_x":"0","global_min_y":"0","global_max":"7.400000","global_max_x":"0","global_max_y":"0","unit":"m"}}
+	
+| Parameter	| Value  | Description | 
+| --- |  --- |  --- | 
+|global_min | | |
+|global_max | | |
+|global_min_x | | |
+|global_min_y | | |
+|global_max_x | | |
+|global_max_y | | |
+	
+	
 
 
