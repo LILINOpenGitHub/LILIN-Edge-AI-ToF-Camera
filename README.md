@@ -43,13 +43,7 @@ Example:
 http://192.168.0.200:8592/gettofpixel?x=13&y=25
 ```
 <strong>Return: </strong> <BR>
-{ <BR>
-"x":"1",  <BR>
-"y":"1",  <BR>
-"depth":"5.03" <BR>
-"height": "2.03" <BR>
-"distance": "3.15" <BR>
-} <BR>
+{"x":"13", "y":"25", "depth":"1.289000", "height":"2.138871", "distance":"1.202239"}
 
 Parameters
 | Parameters	|  Description 	|	 
