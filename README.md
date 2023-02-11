@@ -38,6 +38,10 @@ Parameters
 Syntax:
 http://192.168.0.200:8592/gettofpixel?x=<myX>&y=<myY>
 ```
+```
+Example:
+http://192.168.0.200:8592/gettofpixel?x=13&y=25
+```
 <strong>Return: </strong> <BR>
 { <BR>
 "x":"1",  <BR>
