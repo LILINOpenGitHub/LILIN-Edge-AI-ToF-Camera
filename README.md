@@ -73,13 +73,15 @@ Content-Type: text/html; charset=utf-8
 \r\n
 \r\n
 {"AiEngine":
-[{"id":0,"channel_id":1,"camera_name":"DS362","res_height":1080,"res_width":1920,"confidence":60,	"confidence2":60,"progress_bar":0,"engine_type":4,"label_name":"tof_point","class_id":1000,
+[{"id":0,"channel_id":1,"camera_name":"DS362","res_height":1080,"res_width":1920,"confidence":60,
+"confidence2":60,"progress_bar":0,"engine_type":4,"label_name":"tof_point","class_id":1000,
 "obj_type":0,"obj_tracking_id":1,"obj_dwell_time":289,"color_id":0,"color":"","sec_color_id":0,
 "sec_color":"","car_type_name":"","logo":"","linked_plate":"","x":480,"y":270,"w":960,"h":540,
 "center_direction":"","center_speed":"","parent_idx":-1,"detection_zone_id":1,"detection_zone_id2":0,
 "detection_zone_id3":0,"detection_zone_id4":0,"behavior_id":262144}],"counter_count":[0,0,0,0,0,0,0,0],"something_vanish_in_zone1":"No","something_vanish_in_zone2":"No",
 "something_vanish_in_zone3":"No","something_vanish_in_zone4":"No","Count":1,
 "configdirty":0,"AI_fps":15,"red_light":0,"snap_size":0,"snap_response":"Disable","snap_image":"",
+
 "AIToF":{"Time":"1676131612","min_tof_range":"0.010000","global_min_x":"0","global_min_y":"0",
 "max_tof_range":"1.815000","global_max_x":"135","global_max_y":"123","unit":"m"}}
 --myboundary
