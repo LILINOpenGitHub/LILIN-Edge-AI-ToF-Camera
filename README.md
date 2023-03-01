@@ -140,6 +140,7 @@ Example: <BR>
 |global_max_y | | The point cloud Y of the global min |
 
 ## Get PCD text 
+LILIN camera can support PCD (point cloud data) in text mode.  For more detail, visit PCD (https://pointclouds.org/).
 ```
 Syntax:
 http://192.168.0.200:8592/gettof3dpcd
