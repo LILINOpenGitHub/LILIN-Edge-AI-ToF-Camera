@@ -141,17 +141,21 @@ Example: <BR>
 
 ## Get PCD text 
 LILIN camera can support PCD (point cloud data) in text mode.  For more detail, visit PCD (https://pointclouds.org/).
+
+Example: Get 160 * 120 point cloud text data.
 ```
 Syntax:
 http://192.168.0.200:8592/gettof3dpcd
 ```
-```
-Syntax:
-http://192.168.0.200:8592/gettof3dpcd?res=480
-```
+Example: Get 320 * 240 point cloud text data.
 ```
 Syntax:
 http://192.168.0.200:8592/gettof3dpcd?res=240
+```
+Example: Get 160 * 120 point cloud text data.
+```
+Syntax:
+http://192.168.0.200:8592/gettof3dpcd?res=120
 ```
 	
 
