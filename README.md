@@ -138,7 +138,20 @@ Example: <BR>
 |global_min_y | | The point cloud Y of the global min |
 |global_max_x | | The point cloud X of the global max |
 |global_max_y | | The point cloud Y of the global min |
-	
+
+## Get PCD text 
+```
+Syntax:
+http://192.168.0.200:8592/gettof3dpcd
+```
+```
+Syntax:
+http://192.168.0.200:8592/gettof3dpcd?res=480
+```
+```
+Syntax:
+http://192.168.0.200:8592/gettof3dpcd?res=240
+```
 	
 
 
