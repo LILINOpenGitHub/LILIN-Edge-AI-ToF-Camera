@@ -9,7 +9,7 @@ The combination of LILIN Navigator software and IP cameras will maximize your sy
 
 ![image](https://github.com/LILINOpenGitHub/LILIN-Edge-AI-ToF-Camera/blob/main/image/ds632.jpg)
 <p>
-Visit the video at (https://www.youtube.com/watch?v=eVELFj-NKZg)
+Visit the video at (https://www.youtube.com/watch?v=H36yX3Axwhw)
 </p>
 
 ## The SDK
