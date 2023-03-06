@@ -147,6 +147,11 @@ Example: Get 160 * 120 point cloud text data.
 Syntax:
 http://192.168.0.200:8592/gettof3dpcd
 ```
+Example: Get 640 * 480 point cloud text data.
+```
+Syntax:
+http://192.168.0.200:8592/gettof3dpcd?res=480
+```
 Example: Get 320 * 240 point cloud text data.
 ```
 Syntax:
