@@ -152,11 +152,6 @@ Example: Get the point cloud data of 640 * 480 in centimeter.
 Syntax:
 http://192.168.0.200:8592/gettof3dpcd?res=480
 ```
-Example: Get the point cloud data of 320 * 240 in centimeter.
-```
-Syntax:
-http://192.168.0.200:8592/gettof3dpcd?res=240
-```
 Example: Get 160 * 120 point cloud text data.
 ```
 Syntax:
