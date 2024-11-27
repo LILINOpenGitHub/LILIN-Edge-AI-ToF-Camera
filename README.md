@@ -14,149 +14,238 @@ Visit the video at (https://www.youtube.com/watch?v=H36yX3Axwhw)
 
 ## The SDK
 
-## Get minimum and maximun hight/depth values for the ToF Camera
-```
-Syntax:
-http://192.168.0.200:8592/gettofrange
-```
-<strong>Return: </strong> <BR>
-{ <BR>
-"min_tof_range":"0.000000",  <BR>
-"max_tof_range":"7.400000", <BR>
-"unit":"M" <BR>
-} <BR>
+### Query server status
+Get the engine status including system ID, version, license and mode info.
 
-Parameters
-| Parameters	|  Description 	                           |
-| ---  		|  ---  	                           |
-| min_tof_range | The minimum depth of ToF field of view.  |
-| max_tof_range | The maximun depth of ToF field of view.  |
-| unit 		| Depth distance unit of ToF. ( M: Meter ) |
+#### Syntax
+```
+http://<serverIP:8592>/server
+```
+```bash
+curl -u <username>:<password> \
+    "http://<serverIP:8592>/server"
+```
+#### Response Parameters
+| Parameters      | Type   | Description                                             |
+| ---             | ---    | ---                                                     |
+| `DeviceName`    | string | Engine name.                                            |
+| `Version`       | string | The version number of plugin.                           |
+| `Language`      | string | The language setting of plugin.                         |
+| `SystemID`      | string | The MAC address of device.                              |
+| `LicenseType`   | string | The license type of plugin.                             |
+| `LicenseStatus` | string | License status description, showing the remaining days. |
+| `UnlockingKey`  | string | The unlocking key of current license.                   |
+| `ModeName`      | string | Plugin mode definition, TOF is defined as mod011.        |
+#### Response Example
+```
+DeviceName=GYNet
+Version=2.0.5.30-90 Language=en_gb
+SystemID=00-0F-FC-74-48-95
+LicenseType= EDGETOF (ToF Recognition),
+LicenseStatus=Licensed(3 days left)
+UnlockingKey=RXYlyY/7r76Ctsc/BI+hbU/z6cHmSy6EgVUvQlMoYwkg1vpYyCTnFpqlJ6rPW7to2qJO9iyPnsQF22kaI4HpvV/Ii1jAvsLFjr2Qr0CSvHE=
+ModeName=mod011
+```
+
+### Get minimum and maximun depth values of ToF Camera
+This API is used to obtain the farthest and nearest depths within the current ToF device field of view, with the distance unit meters.
+#### Syntax
+```
+http://<serverIP:8592>/gettofrange
+```
+```bash
+curl -u <username>:<password> \
+    "http://<serverIP:8592>/gettofrange"
+```
+#### Response Parameters
+| Parameters      | Type                    | Description                              |
+| ---             | ---                     | ---                                      |
+| `min_tof_range` | string ( float format ) | The minimum depth of ToF field of view.  |
+| `max_tof_range` | string ( float format ) | The maximun depth of ToF field of view.  |
+| `unit`          | string                  | Depth distance unit of ToF. ( M: Meter ) |
+
+#### Response Example
+```json
+{
+    "min_tof_range":"0.000000",
+    "max_tof_range":"7.400000",
+    "unit":"M"
+}
+```
+
   
-## Get hight/depth by a X and Y on the screen
-```
-Syntax:
-http://192.168.0.200:8592/gettofpixel?x=<myX>&y=<myY>
-```
-```
-Example:
-http://192.168.0.200:8592/gettofpixel?x=13&y=25
-```
-<strong>Return: </strong> <BR>
-{"x":"13", "y":"25", "depth":"1.289000", "height":"2.138871", "distance":"1.202239"}
+### Get 3D information by 2D coordinate on the screen
+This API can retrieve 3D information for specific 2D coordinates on the screen, including depth, distance, height, and world coordinates. 
 
-Parameters
-| Parameters	|  Description 	|	 
-| ---  		|  ---  	|  
-| myX   		| X axis = 0 ~ 799		| 
-| myY 		| Y axis = 0 ~ 599	| 
-| myAngle 		| The angle = 90, 60, 45, 30, or 0  	| 
-
-#  Get recognition results
-Get run-time recognition results.  Both HTTP based and websocket are supported.
+The origin of the world coordinate system is based on the point directly below the camera on the ground. The distance unit of this coordinate system is Meter.
+#### Syntax
 ```
-Syntax: 
+http://<serverIP:8592>/gettofpixel?x=<myX>&y=<myY>
+```
+```bash
+curl -u <username>:<password> \
+    http://<serverIP:8592>/gettofpixel?x=13&y=25
+```
+#### Request Parameters
+| Parameters | Type | Required | Description                                   |
+| ---        | ---  | ---      | ---  	                                       |
+| `x`        | int  | Yes      | Coordinate on the X-axis. ( Range : 0 ~ 799 ) |
+| `y`        | int  | Yes      | Coordinate on the Y-axis. ( Range : 0 ~ 599 ) | 
+#### Response Parameters
+| Parameters | Type                    | Description                                                                     |
+| ---        | ---                     | ---                                                                             |
+| `x`        | string ( int format )   | The 2D X-axis parameter coordinate included when sending the request.           |
+| `y`        | string ( int format )   | The 2D Y-axis parameter coordinate included when sending the request.           |
+| `depth`    | string ( float format ) | 3D depth of the 2D coordinate position on the screen.                           |
+| `height`   | string ( float format ) | Vertical height based on the origin for the 3D point corresponding to the 2D screen coordinates. ( Equivalent to the Z-coordinate in the world coordinate system ) |
+| `distance` | string ( float format ) | Horizontal distance based on the origin for the 3D point corresponding to the 2D screen coordinates. |
+| `worldX`   | string ( float format ) | The X-coordinate of the 3D point corresponding to the 2D screen coordinates. |
+| `worldY`   | string ( float format ) | The Y-coordinate of the 3D point corresponding to the 2D screen coordinates. |
+#### Response Example
+```json
+{
+    "x":"13", 
+    "y":"25", 
+    "depth":"3.458000", 
+    "height":"1.668040", 
+    "distance":"3.457612", 
+    "worldX":"-1.725277", 
+    "worldY":"2.996414"
+}
+```
+
+###  Get recognition results
+This API can obtain runtime AI recognition and behavior determination results, including information on objects, zone settings, and behaviors.
+
+Both HTTP based and websocket are supported.
+
+#### Syntax
+```bash
 http://<serverIP:8592>/getalarmmotion
+# Recommended to open with Firefox browser
 ```
-
 ```
-Syntax: 
 ws://<serverIP:8592>/getalarmmotion
 ```
-	
+```bash
+curl --verbose --get --http0.9 --user <username>:<password> \
+    http://<serverIP:8592>/getalarmmotion
+```
+
+The Response data can be broadly divided into two sections: AiEngine and AIToF. 
+
+The following parameters are explained in two corresponding fields.
+
+#### Response Parameters
+
+##### Raw data
+| Parameter	        | Type    | Description                                                          |
+| ---               | ---     | ---                                                                  |
+| `CLength`	        | integer | HTTP content length.                                                 |
+| `TimeStamp`	    | string  | Date & time info, eg. 2019-09-27 00:53:48.                           |
+
+##### AiEngine
+| Parameter	          | Type    | Description                                                          |
+| ---                 | ---     | ---                                                                  |
+| `id`                | integer | The object sequence of a frame.                                      |
+| `camera_name`       | string  | The name of the camera.                                              |
+| `res_height`        | integer | The height of the 2D coordinate system in the AI tracking algorithm. |
+| `res_width`         | integer | The width of the 2D coordinate system in the AI tracking algorithm.  |
+| `confidence`        | integer | The confidence threshold of zone #N.                                 |
+| `label_name`        | string  | The classified object name.                                          |
+| `class_id`          | integer | The classified object ID.                                            |
+| `obj_tracking_id`   | integer | The tracking ID of a classified object.                              |
+| `obj_dwell_time`    | integer | The tracked object's time in second.                                 |
+| `x`                 | integer | The x position of an object relative to res_height and res_width.    |
+| `y`                 | integer | The y position of an object relative to res_height and res_width.    |
+| `w`                 | integer | The width of an object relative to res_height and res_width.         |
+| `h`                 | integer | The width of an object relative to res_height and res_width.         |
+| `detection_zone_id` | integer | Zone index # 1 ~ 8.                                                  |
+| `behavior_id`       | integer | The behavior ID of an object in a zone, please refer to: [behavior table](https://github.com/LILINOpenGitHub/LILIN-Edge-Aida-Camera/blob/main/behaviorID/behaviorID.json) |
+
+Descriptions of irrelevant, under-development, or deprecated parameters are omitted.
+
+##### AIToF
+
+<!-- min_tof_range, max_tof_range -->
+
+| Parameter	      | Type                      | Description                                                                                | 
+| ---             | ---                       | ---                                                                                        | 
+| `min_tof_range` | string ( float format )   | The minimum depth of ToF field of view.                                                    |
+| `max_tof_range` | string ( float format )   | The maximun depth of ToF field of view.                                                    |
+| `global_min_x`  | string ( integer format ) | The minimum depth position corresponds to the 2D X-axis coordinates on the screen.         |
+| `global_min_y`  | string ( integer format ) | The minimum depth position corresponds to the 2D Y-axis coordinates on the screen.         |
+| `global_max_x`  | string ( integer format ) | The maximun depth position corresponds to the 2D X-axis coordinates on the screen.         |
+| `global_max_y`  | string ( integer format ) | The maximun depth position corresponds to the 2D Y-axis coordinates on the screen.         |
+| `ground1_Ht`    | string ( float format )   | The height value converted based on the ground reference point #1 as configured in the UI. |
+| `ground2_Ht`    | string ( float format )   | The height value converted based on the ground reference point #2 as configured in the UI. |
+| `ground3_Ht`    | string ( float format )   | The height value converted based on the ground reference point #3 as configured in the UI. |
+| `unit`          | string                    | Units of distance for the maximun and minimum depths and ground point height. (m: meter)   |
+
+Descriptions of irrelevant, under-development, or deprecated parameters are omitted.
+
+#### Response Example
+Raw data example
 ```
 --myboundary
 \r\n
+Content-Type: text/plain
+\r\n
 Content-Length: <CLength>
 \r\n
-Content-Type: text/html; charset=utf-8
+CamTime: <TimeStamp>
 \r\n
 \r\n
-{"AiEngine":
-[{"id":0,"channel_id":1,"camera_name":"DS362","res_height":1080,"res_width":1920,"confidence":60,
-"confidence2":60,"progress_bar":0,"engine_type":4,"label_name":"tof_point","class_id":1000,
-"obj_type":0,"obj_tracking_id":1,"obj_dwell_time":289,"color_id":0,"color":"","sec_color_id":0,
-"sec_color":"","car_type_name":"","logo":"","linked_plate":"","x":480,"y":270,"w":960,"h":540,
-"center_direction":"","center_speed":"","parent_idx":-1,"detection_zone_id":1,"detection_zone_id2":0,
-"detection_zone_id3":0,"detection_zone_id4":0,"behavior_id":262144}],"counter_count":[0,0,0,0,0,0,0,0],"something_vanish_in_zone1":"No","something_vanish_in_zone2":"No",
-"something_vanish_in_zone3":"No","something_vanish_in_zone4":"No","Count":1,
-"configdirty":0,"AI_fps":15,"red_light":0,"snap_size":0,"snap_response":"Disable","snap_image":"",
-
-"AIToF":{"Time":"1676131612","min_tof_range":"0.010000","global_min_x":"0","global_min_y":"0",
-"max_tof_range":"1.815000","global_max_x":"135","global_max_y":"123","unit":"m"}}
+{"AiEngine":[{"id":0,"channel_id":1,"camera_name":"DS362","res_height":1080,"res_width":1920,"confidence":100,"confidence2":0,"progress_bar":0,"engine_type":4,"label_name":"tof_point","class_id":1000,"obj_type":0,"obj_tracking_id":2179,"obj_dwell_time":5,"tof_distance":0,"tof_height":0,"max_height_x":0,"max_height_y":0,"tof_height_velocity":0,"x":1464,"y":1071,"w":60,"h":45,"center_direction":"","parent_idx":-1,"min_distance":963,"max_distance":0,"min_height":749,"max_height":0,"detection_zone_id":0,"detection_zone_id2":0,"detection_zone_id3":0,"detection_zone_id4":0,"behavior_id":0,"clinical_behavior_z1":"00000","clinical_behavior_z2":"00000","clinical_behavior_z3":"00000","clinical_behavior_z4":"00000"},{"id":1,"channel_id":1,"camera_name":"DS362","res_height":1080,"res_width":1920,"confidence":100,"confidence2":0,"progress_bar":0,"engine_type":4,"label_name":"tof_point","class_id":1000,"obj_type":0,"obj_tracking_id":2178,"obj_dwell_time":19,"tof_distance":0,"tof_height":0,"max_height_x":0,"max_height_y":0,"tof_height_velocity":0,"x":1440,"y":405,"w":60,"h":45,"center_direction":"","parent_idx":-1,"min_distance":0,"max_distance":5156,"min_height":0,"max_height":231,"detection_zone_id":0,"detection_zone_id2":0,"detection_zone_id3":0,"detection_zone_id4":0,"behavior_id":0,"clinical_behavior_z1":"00000","clinical_behavior_z2":"00000","clinical_behavior_z3":"00000","clinical_behavior_z4":"00000"}],"counter_count":[0,0,0,0,0,0,0,0],"counter_reset_value":[0,0,0,0,0,0,0,0],"counter_operand":["NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL"],"counters":[],"something_vanish_in_zone1":"No","person_inside1":"No","something_vanish_in_zone2":"No","person_inside2":"No","something_vanish_in_zone3":"No","person_inside3":"No","something_vanish_in_zone4":"No","person_inside4":"No","something_vanish_in_zone5":"No","person_inside5":"No","something_vanish_in_zone6":"No","person_inside6":"No","something_vanish_in_zone7":"No","person_inside7":"No","something_vanish_in_zone8":"No","person_inside8":"No","Count":2,"configdirty":0,"AI_fps":9,"snap_size":0,"snap_response":"Disable","snap_image":"","AIToF":{"Time":"1732690423","min_tof_range":"1.367000","global_min_x":"488","global_min_y":"476","max_tof_range":"5.367000","global_max_x":"480","global_max_y":"180","unit":"m","ground1_Ht":"1.69","ground2_Ht":"1.72","ground3_Ht":"1.76","ground1_x":0,"ground1_y":0,"ground2_x":0,"ground2_y":0,"ground3_x":0,"ground3_y":0,"ground2_tilt_angle":0,"ground3_tilt_angle":0,"leaning_angle":0}}
 --myboundary
 \r\n
+Content-Type: text/plain
+\r\n
 Content-Length: <CLength>
 \r\n
-Content-Type: text/html; charset=utf-8
+CamTime: <TimeStamp>
 \r\n
 \r\n
-CamTime: <TimeStamp>\r\n
 {
 "AiEngine":<JSON>
 }
 ```
 
-| Parameter	| Value  | Description | 
-| --- |  --- |  --- | 
-| CLength	| Integer| HTTP content length| 
-| TimeStamp	| String | Date & time info, eg. 2019-09-27 00:53:48| 
-| id | Integer | The object sequence of a frame |
-| channel_id | Integer | The channel ID, fix to 1 if it is an IP camera |
-| camera_name | String | The name of the camera |
-| res_height | Integer | The canvas resolution in height of the bounding box drawing even the AI is in 4K recognition. |
-| res_width | Integer | The canvas resolution in width of the bounding box drawing even the AI is in 4K recognition. |
-| confidence | Integer | The confidence threshold of zone #1 |
-| confidence | Integer | The confidence threshold of zone #1 |
-| confidence2 | Integer | Reserve for future use |
-| progress_bar | Integer | The setting writing progress when apply back to the camaera. |
-| engine_type | Integer | The license type of the license key |
-| label_name | String | The classified object name |
-| class_id | Integer | The classified object ID |
-| obj_type | String | Reserve for future use |
-| obj_tracking_id | Integer | The tracking ID of a classified object |
-| obj_dwell_time | Integer | The tracked object's time in second |
-| color_id | Integer | The color ID, see [color table](https://github.com/LILINOpenGitHub/LILIN-Edge-Aida-Camera/blob/main/Color%20ID/ColorID.json) |
-| color | String | The name of the color |
-| linked_plate | String | The number plate is linked to an object |
-| x | Integer | The x position of an object relative to res_height and res_width |
-| y | Integer | The y position of an object relative to res_height and res_width |
-| w | Integer | The width of an object relative to res_height and res_width |
-| h | Integer | The width of an object relative to res_height and res_width |
-| parent_idx | Integer | The object belong to a parent, used by linked_plate |
-| detection_zone_id | Integer | zone # 1 ~ 4 |
-| behavior_id | Integer | The behavior ID of an object in a zone, see [behavior table](https://github.com/LILINOpenGitHub/LILIN-Edge-Aida-Camera/blob/main/behaviorID/behaviorID.json) |
-
-Example: <BR>
-{"AiEngine":[],"counter_count":[0,0,0,0,0,0,0,0],"something_vanish_in_zone1":"No","something_vanish_in_zone2":"No","something_vanish_in_zone3":"No","something_vanish_in_zone4":"No","Count":0,"configdirty":0,"AI_fps":10,"red_light":0,"snap_size":0,"snap_response":"Disable","snap_image":"","AIToF":{"Time":"1675132307","global_min":"0.000000","global_min_x":"0","global_min_y":"0","global_max":"7.400000","global_max_x":"0","global_max_y":"0","unit":"m"}}
-
-| Parameter	| Value  | Description | 
-| --- |  --- |  --- | 
-|global_min | | The global depth of the tof in meter|
-|global_max | | The global depth of the tof in meter|
-|global_min_x | | The point cloud X of the global min |
-|global_min_y | | The point cloud Y of the global min |
-|global_max_x | | The point cloud X of the global max |
-|global_max_y | | The point cloud Y of the global min |
-
-## Get PCD text 
-LILIN camera can support PCD (point cloud data) in text mode.  For more detail, visit PCD (https://pointclouds.org/).
-
-Example: Get the point cloud data of 160 * 120 in centimeter.
+JSON format example
+```json
+{
+  "AiEngine": [
+    {
+      "id": 0,
+      "camera_name": "DS362",
+      "res_height": 1080,
+      "res_width": 1920,
+      "confidence": 91,
+      "label_name": "person",
+      "class_id": 0,
+      "obj_tracking_id": 3176,
+      "obj_dwell_time": 25,
+      "x": 837,
+      "y": 238,
+      "w": 478,
+      "h": 753,
+      "behavior_id": 0
+    }
+  ],
+  "AIToF": {
+    "min_tof_range": "1.377000",
+    "global_min_x": "480",
+    "global_min_y": "476",
+    "max_tof_range": "5.406000",
+    "global_max_x": "488",
+    "global_max_y": "200",
+    "unit": "m",
+    "ground1_Ht": "1.69",
+    "ground2_Ht": "1.72",
+    "ground3_Ht": "1.76"
+  }
+}
 ```
-Syntax:
-http://192.168.0.200:8592/gettof3dpcd
-```
-Example: Get the point cloud data of 640 * 480 in centimeter.
-```
-Syntax:
-http://192.168.0.200:8592/gettof3dpcd?res=480
-```
-Example: Get 160 * 120 point cloud text data.
-```
-Syntax:
-http://192.168.0.200:8592/gettof3dpcd?res=120
-```
-	
+Irrelevant, under-development, deprecated parameters are omitted.
 
 
