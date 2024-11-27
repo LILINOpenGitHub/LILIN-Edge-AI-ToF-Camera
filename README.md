@@ -27,11 +27,11 @@ http://192.168.0.200:8592/gettofrange
 } <BR>
 
 Parameters
-| Parameters	|  Description 	|	 
-| ---  		|  ---  	|  
-| min_tof_range   		| The minimun hight or depth of ToF in meter		| 
-| max_tof_range 		| The maximun hight or depth of ToF in meter | 
-| unit 		| The unit of the ToF in meter or foot 	| 
+| Parameters	|  Description 	                           |
+| ---  		|  ---  	                           |
+| min_tof_range | The minimum depth of ToF field of view.  |
+| max_tof_range | The maximun depth of ToF field of view.  |
+| unit 		| Depth distance unit of ToF. ( M: Meter ) |
   
 ## Get hight/depth by a X and Y on the screen
 ```
