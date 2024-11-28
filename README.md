@@ -47,6 +47,278 @@ UnlockingKey=RXYlyY/7r76Ctsc/BI+hbU/z6cHmSy6EgVUvQlMoYwkg1vpYyCTnFpqlJ6rPW7to2qJ
 ModeName=mod011
 ```
 
+
+### Query detection zone settings
+This API is used to obtain information related to the specified zone index.
+
+#### Syntax
+```
+http://<serverIP:8592>/getconfig?ch=<ch_id>&detection_zone=<zone_id>
+```
+```bash
+curl -u <username>:<password> \
+    "http://<serverIP:8592>/getconfig?ch=1&detection_zone=0"
+```
+#### Request Parameters
+| Parameters | Type     | Required | Description                                             |
+| ---        | ---      | ---      | ---  	                                                 |
+| `ch_id`    | integer  | Yes      | Channel id is a constant on ToF devices, please use 1.  |
+| `zone_id`  | integer  | Yes      | Represents the index of the zone (Range: 0 ~ 7).        |
+
+#### Response Parameters
+| Parameters       | Type    | Description                                                                   |
+| ---              | ---     | ---                                                                           |
+| `trigger_events` | array   | Covers the existing trigger definitions. For the corresponding relationships on ToF devices, please refer to: [ToF behavior table](https://github.com/LILINOpenGitHub/LILIN-Edge-Aida-Camera/blob/main/behaviorID/ToFbehaviorID.json) |
+| `point_number`   | integer | Indicates the number of control points in the Nth detection zone.             |
+| `x1`             | integer | Indicates the X-coordinate of the #1 control point of the Nth detection zone. |
+| `y1`             | integer | Indicates the Y-coordinate of the #1 control point of the Nth detection zone. |
+| `x2`             | integer | Indicates the X-coordinate of the #2 control point of the Nth detection zone. |
+| `y2`             | integer | Indicates the Y-coordinate of the #2 control point of the Nth detection zone. |
+| `x3`             | integer | Indicates the X-coordinate of the #3 control point of the Nth detection zone. |
+| `y3`             | integer | Indicates the Y-coordinate of the #3 control point of the Nth detection zone. |
+| `x4`             | integer | Indicates the X-coordinate of the #4 control point of the Nth detection zone. |
+| `y4`             | integer | Indicates the Y-coordinate of the #4 control point of the Nth detection zone. |
+| `x5`             | integer | Indicates the X-coordinate of the #5 control point of the Nth detection zone. |
+| `y5`             | integer | Indicates the Y-coordinate of the #5 control point of the Nth detection zone. |
+| `x6`             | integer | Indicates the X-coordinate of the #6 control point of the Nth detection zone. |
+| `y6`             | integer | Indicates the Y-coordinate of the #6 control point of the Nth detection zone. |
+
+Descriptions of irrelevant, under-development, or deprecated parameters are omitted.
+
+#### Response Example
+```json
+{
+  "enable_direction1": "No",
+  "enable_direction2": "",
+  "direction1": "1",
+  "direction2": "",
+  "enable_tripwire": "",
+  "enable_traffic_light": "",
+  "enable_social_distance": "",
+  "metadata1": "person",
+  "metadata2": "",
+  "metadata_stop": "",
+  "no_parking_time": "5",
+  "no_parking_time_in_minute": "0",
+  "queuing_count": "1",
+  "distance_violation_count": "",
+  "detection_time": "",
+  "link_to_counter": "",
+  "obj_max_proportion_in_zone": "80",
+  "obj_min_proportion_in_zone": "0",
+  "ptz_zone_to_preset": "0",
+  "enable_speed": "No",
+  "enable_radar_speed": "No",
+  "parking_space": "0",
+  "parking_line": "0",
+  "set_distance": "10.000000",
+  "world_distance_unit": "meter",
+  "world_distance_side1": "10.000000",
+  "world_distance_side2": "10.000000",
+  "world_time_unit": "KPH",
+  "trigger_events": [
+    {
+      "checked": 0,
+      "detect_event_id": "0x00000001",
+      "detect_event_name": "Prohibit zone (AIAREA)",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00000004",
+      "detect_event_name": "Parking violation (AIAREA/AICAP)",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00200000",
+      "detect_event_name": "Allowed list",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00400000",
+      "detect_event_name": "Denial list",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00000008",
+      "detect_event_name": "Traffic flow (AIFLOW/AICAP)",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00000010",
+      "detect_event_name": "Turn left (AIFLOW)",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00000020",
+      "detect_event_name": "Turn right (AIFLOW)",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x10000000",
+      "detect_event_name": "Density detection (03AI)",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x20000000",
+      "detect_event_name": "Missing object detection (01AI)",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00800000",
+      "detect_event_name": "Visitor list",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x01000000",
+      "detect_event_name": "Unattended object or missing object",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x02000000",
+      "detect_event_name": "BG learning",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x04000000",
+      "detect_event_name": "Tampering detection",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x40000000",
+      "detect_event_name": "All objects detection",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x80000000",
+      "detect_event_name": "Lack of any object detection",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00002000",
+      "detect_event_name": "Over speed detection",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00004000",
+      "detect_event_name": "Lower speed detection",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00000400",
+      "detect_event_name": "Running red lights",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00000800",
+      "detect_event_name": "Turning left on red",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00001000",
+      "detect_event_name": "Turning right on red",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00008000",
+      "detect_event_name": "Forget to give way detection",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 0,
+      "detect_event_id": "0x00040000",
+      "detect_event_name": "Distance violation",
+      "post_event_name": "",
+      "counter_name": "",
+      "counter_increment": ""
+    },
+    {
+      "checked": 1,
+      "detect_event_id": "0x08000000",
+      "detect_event_name": "Height detection",
+      "post_event_name": "Camera virtual 1",
+      "counter_name": "",
+      "counter_increment": ""
+    }
+  ],
+  "point_number": 6,
+  "x1": 20,
+  "y1": 20,
+  "x2": 20,
+  "y2": 250,
+  "x3": 20,
+  "y3": 480,
+  "x4": 869,
+  "y4": 480,
+  "x5": 869,
+  "y5": 250,
+  "x6": 869,
+  "y6": 20
+}
+```
+
+
 ### Get minimum and maximun depth values of ToF Camera
 This API is used to obtain the farthest and nearest depths within the current ToF device field of view, with the distance unit meters.
 #### Syntax
