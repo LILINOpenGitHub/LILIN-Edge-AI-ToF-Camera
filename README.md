@@ -244,8 +244,7 @@ http://<serverIP:8592>/getalarmmotion
 ws://<serverIP:8592>/getalarmmotion
 ```
 ```bash
-curl --verbose --get --http0.9 --user <username>:<password> \
-    http://<serverIP:8592>/getalarmmotion
+curl --verbose --get --http0.9 --user "<username>:<password>" http://<serverIP:8592>/getalarmmotion
 ```
 
 The Response data can be broadly divided into two sections: AiEngine and AIToF. 
