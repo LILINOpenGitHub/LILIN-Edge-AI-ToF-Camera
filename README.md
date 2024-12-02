@@ -66,9 +66,13 @@ curl -u <username>:<password> \
 | `zone_id`  | integer  | Yes      | Represents the index of the zone (Range: 0 ~ 7).        |
 
 #### Response Parameters
-| Parameters       | Type    | Description                                                                   |
-| ---              | ---     | ---                                                                           |
-| `trigger_events` | array   | Covers the existing trigger definitions. For the corresponding relationships on ToF devices, please refer to: [ToF behavior table](https://github.com/LILINOpenGitHub/LILIN-Edge-Aida-Camera/blob/main/behaviorID/ToFbehaviorID.json) |
+| Parameters                   | Type    | Description                                                                   |
+| ---                          | ---     | ---                                                                           |
+| `no_parking_time`            | string ( integer format ) | The dwell time threshold in seconds, used on ToF devices for determining conditions related to Person inside and In-bed detection events. |
+| `no_parking_time_in_minute`  | string ( integer format ) | The dwell time threshold in minutes, used on ToF devices for determining conditions related to Person inside and In-bed detection events. |
+| `obj_max_proportion_in_zone` | string ( integer format ) | The upper bound of the object area ratio filter threshold, calculated as the object area divided by the screen dimensions. |
+| `obj_min_proportion_in_zone` | string ( integer format ) | The upper bound of the object area ratio filter threshold, calculated as the object area divided by the screen dimensions. |
+| `trigger_events`             | array   | Covers the existing trigger definitions. For the corresponding relationships on ToF devices, please refer to: [ToF behavior table](https://github.com/LILINOpenGitHub/LILIN-Edge-Aida-Camera/blob/main/behaviorID/ToFbehaviorID.json) |
 | `point_number`   | integer | Indicates the number of control points in the Nth detection zone.             |
 | `x1`             | integer | Indicates the X-coordinate of the #1 control point of the Nth detection zone. |
 | `y1`             | integer | Indicates the Y-coordinate of the #1 control point of the Nth detection zone. |
@@ -88,39 +92,15 @@ Descriptions of irrelevant, under-development, or deprecated parameters are omit
 #### Response Example
 ```json
 {
-  "enable_direction1": "No",
-  "enable_direction2": "",
-  "direction1": "1",
-  "direction2": "",
-  "enable_tripwire": "",
-  "enable_traffic_light": "",
-  "enable_social_distance": "",
-  "metadata1": "person",
-  "metadata2": "",
-  "metadata_stop": "",
   "no_parking_time": "5",
   "no_parking_time_in_minute": "0",
-  "queuing_count": "1",
-  "distance_violation_count": "",
-  "detection_time": "",
-  "link_to_counter": "",
   "obj_max_proportion_in_zone": "80",
   "obj_min_proportion_in_zone": "0",
-  "ptz_zone_to_preset": "0",
-  "enable_speed": "No",
-  "enable_radar_speed": "No",
-  "parking_space": "0",
-  "parking_line": "0",
-  "set_distance": "10.000000",
-  "world_distance_unit": "meter",
-  "world_distance_side1": "10.000000",
-  "world_distance_side2": "10.000000",
-  "world_time_unit": "KPH",
   "trigger_events": [
     {
       "checked": 0,
       "detect_event_id": "0x00000001",
-      "detect_event_name": "Prohibit zone (AIAREA)",
+      "detect_event_name": "In-bed",
       "post_event_name": "",
       "counter_name": "",
       "counter_increment": ""
@@ -128,23 +108,7 @@ Descriptions of irrelevant, under-development, or deprecated parameters are omit
     {
       "checked": 0,
       "detect_event_id": "0x00000004",
-      "detect_event_name": "Parking violation (AIAREA/AICAP)",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00200000",
-      "detect_event_name": "Allowed list",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00400000",
-      "detect_event_name": "Denial list",
+      "detect_event_name": "Person inside",
       "post_event_name": "",
       "counter_name": "",
       "counter_increment": ""
@@ -152,31 +116,7 @@ Descriptions of irrelevant, under-development, or deprecated parameters are omit
     {
       "checked": 0,
       "detect_event_id": "0x00000008",
-      "detect_event_name": "Traffic flow (AIFLOW/AICAP)",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00000010",
-      "detect_event_name": "Turn left (AIFLOW)",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00000020",
-      "detect_event_name": "Turn right (AIFLOW)",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x10000000",
-      "detect_event_name": "Density detection (03AI)",
+      "detect_event_name": "Personnel entry count (Zone1) / Personnel exit count (Zone2)",
       "post_event_name": "",
       "counter_name": "",
       "counter_increment": ""
@@ -184,31 +124,7 @@ Descriptions of irrelevant, under-development, or deprecated parameters are omit
     {
       "checked": 0,
       "detect_event_id": "0x20000000",
-      "detect_event_name": "Missing object detection (01AI)",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00800000",
-      "detect_event_name": "Visitor list",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x01000000",
-      "detect_event_name": "Unattended object or missing object",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x02000000",
-      "detect_event_name": "BG learning",
+      "detect_event_name": "Bed leaving",
       "post_event_name": "",
       "counter_name": "",
       "counter_increment": ""
@@ -216,79 +132,7 @@ Descriptions of irrelevant, under-development, or deprecated parameters are omit
     {
       "checked": 0,
       "detect_event_id": "0x04000000",
-      "detect_event_name": "Tampering detection",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x40000000",
-      "detect_event_name": "All objects detection",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x80000000",
-      "detect_event_name": "Lack of any object detection",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00002000",
-      "detect_event_name": "Over speed detection",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00004000",
-      "detect_event_name": "Lower speed detection",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00000400",
-      "detect_event_name": "Running red lights",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00000800",
-      "detect_event_name": "Turning left on red",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00001000",
-      "detect_event_name": "Turning right on red",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00008000",
-      "detect_event_name": "Forget to give way detection",
-      "post_event_name": "",
-      "counter_name": "",
-      "counter_increment": ""
-    },
-    {
-      "checked": 0,
-      "detect_event_id": "0x00040000",
-      "detect_event_name": "Distance violation",
+      "detect_event_name": "Wake-up detection",
       "post_event_name": "",
       "counter_name": "",
       "counter_increment": ""
@@ -296,7 +140,7 @@ Descriptions of irrelevant, under-development, or deprecated parameters are omit
     {
       "checked": 1,
       "detect_event_id": "0x08000000",
-      "detect_event_name": "Height detection",
+      "detect_event_name": "Fall detection",
       "post_event_name": "Camera virtual 1",
       "counter_name": "",
       "counter_increment": ""
@@ -359,15 +203,15 @@ curl -u <username>:<password> \
     http://<serverIP:8592>/gettofpixel?x=13&y=25
 ```
 #### Request Parameters
-| Parameters | Type | Required | Description                                   |
-| ---        | ---  | ---      | ---  	                                       |
-| `x`        | int  | Yes      | Coordinate on the X-axis. ( Range : 0 ~ 799 ) |
-| `y`        | int  | Yes      | Coordinate on the Y-axis. ( Range : 0 ~ 599 ) | 
+| Parameters | Type     | Required | Description                                   |
+| ---        | ---      | ---      | ---  	                                       |
+| `x`        | integer  | Yes      | Coordinate on the X-axis. ( Range : 0 ~ 799 ) |
+| `y`        | integer  | Yes      | Coordinate on the Y-axis. ( Range : 0 ~ 599 ) | 
 #### Response Parameters
 | Parameters | Type                    | Description                                                                     |
 | ---        | ---                     | ---                                                                             |
-| `x`        | string ( int format )   | The 2D X-axis parameter coordinate included when sending the request.           |
-| `y`        | string ( int format )   | The 2D Y-axis parameter coordinate included when sending the request.           |
+| `x`        | string ( integer format )   | The 2D X-axis parameter coordinate included when sending the request.           |
+| `y`        | string ( integer format )   | The 2D Y-axis parameter coordinate included when sending the request.           |
 | `depth`    | string ( float format ) | 3D depth of the 2D coordinate position on the screen.                           |
 | `height`   | string ( float format ) | Vertical height based on the origin for the 3D point corresponding to the 2D screen coordinates. ( Equivalent to the Z-coordinate in the world coordinate system ) |
 | `distance` | string ( float format ) | Horizontal distance based on the origin for the 3D point corresponding to the 2D screen coordinates. |
